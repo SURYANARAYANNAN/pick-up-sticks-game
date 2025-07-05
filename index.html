@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick-Up Sticks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <h1>Pick-Up Sticks</h1>
+
+        <div id="controls">
+            <div class="difficulty-selector">
+                <span>Difficulty:</span>
+                <button id="difficultyEasy" class="difficulty-btn active" data-difficulty="easy">Easy</button>
+                <button id="difficultyMedium" class="difficulty-btn" data-difficulty="medium">Medium</button>
+                <button id="difficultyHard" class="difficulty-btn" data-difficulty="hard">Hard</button>
+            </div>
+            <div id="timerDisplay">Time: <span id="timeRemaining">00:00</span></div>
+            <button id="toggleSound" class="control-btn">🔊 Sound On</button>
+            <button id="pauseGame" class="control-btn">❚❚ Pause</button>
+        </div>
+
+        <div id="gameArea">
+            </div>
+
+        <div id="gameOver" style="display: none;">
+            <h2>Game Over!</h2>
+            <p>Your Score: <span id="finalScore">0</span></p>
+            <p>High Score: <span id="highScoreDisplay">0</span></p>
+            <button id="playAgain">Play Again</button>
+        </div>
+
+        <div id="scoreBoard">
+            <h2>Score: <span id="currentScore">0</span></h2>
+            <p>Sticks Remaining: <span id="sticksRemaining">0</span></p>
+            <button id="restartGame">Restart Game</button>
+        </div>
+        <div id="message">Pick a stick!</div>
+    </div>
+
+    <audio id="pickupSound" src="sounds/pickup.wav" preload="auto"></audio>
+    <audio id="foulSound" src="sounds/foul.wav" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

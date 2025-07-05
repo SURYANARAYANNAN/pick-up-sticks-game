@@ -1,0 +1,261 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0e68c; /* Khaki - light sandy color for the 'floor' */
+    color: #333;
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* NEW: Class for foul visual feedback */
+.foul-flash {
+    animation: redFlash 0.3s ease-out;
+}
+
+@keyframes redFlash {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(255, 0, 0, 0.3); } /* Light red overlay */
+    100% { background-color: transparent; }
+}
+
+
+#gameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fdf5e6; /* Old Lace - slightly lighter for container */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 800px;
+    position: relative; /* Crucial for #gameOver's absolute positioning to work correctly within it */
+}
+
+h1 {
+    color: #8b4513; /* SaddleBrown */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+/* NEW: Controls Section */
+#controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.difficulty-selector span {
+    font-weight: bold;
+    color: #8b4513;
+    margin-right: 5px;
+}
+
+.difficulty-btn, .control-btn {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.difficulty-btn:hover, .control-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.difficulty-btn.active {
+    background-color: #28a745; /* Green */
+    color: white;
+    border-color: #28a745;
+}
+
+#timerDisplay {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #d35400;
+}
+
+#pauseGame.paused {
+    background-color: #e74c3c; /* Red when paused */
+    color: white;
+}
+
+
+#gameArea {
+    width: 600px; /* Define the 'floor' area */
+    height: 400px;
+    border: 5px solid #a0522d; /* Sienna */
+    background-color: #d2b48c; /* Tan */
+    position: relative; /* Crucial for absolute positioning of sticks */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden; /* Sticks won't go outside this area */
+    transition: opacity 0.5s ease; /* For fading out gameArea */
+}
+
+/* NEW: Scoring breakdown animation */
+.score-popup {
+    position: absolute;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffd700; /* Gold */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    animation: scorePopup 1s ease-out forwards;
+    pointer-events: none; /* Make sure it doesn't block clicks */
+}
+
+@keyframes scorePopup {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+
+.stick {
+    position: absolute;
+    width: 8px; /* Thin stick */
+    height: 100px; /* Length of the stick */
+    border-radius: 4px; /* Rounded ends */
+    cursor: grab; /* Indicates it's draggable/pickable */
+    /* UPDATED: Added box-shadow to transition */
+    transition: transform 0.1s ease-out, opacity 0.3s ease-out, top 0.3s ease-out, box-shadow 0.2s ease;
+    transform-origin: center center; /* Rotation from the center */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* UPDATED: Hover effect for sticks */
+.stick:hover {
+    transform: scale(1.05) rotate(var(--rotation, 0deg)); /* Slightly larger on hover, maintain original rotation */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Subtle white glow */
+    cursor: grab; /* Keep grab cursor */
+}
+
+
+/* Different stick colors */
+.stick.red { background-color: #e74c3c; }
+.stick.blue { background-color: #3498db; }
+.stick.green { background-color: #2ecc71; }
+.stick.yellow { background-color: #f1c40f; }
+.stick.black { background-color: #333; } /* For the 'master' stick */
+
+#scoreBoard {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#scoreBoard h2, #scoreBoard p {
+    margin: 0;
+    color: #8b4513;
+}
+
+#scoreBoard span {
+    font-weight: bold;
+    color: #d35400; /* Carrot Orange */
+}
+
+#message {
+    font-size: 1.5em;
+    color: #8b4513;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+#restartGame {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #27ae60; /* Emerald Green */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#restartGame:hover {
+    background-color: #2ecc71;
+    transform: translateY(-2px);
+}
+
+#restartGame:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Game Over Screen styles */
+#gameOver {
+    position: absolute;
+    top: 0; /* Align to top of its relative parent */
+    left: 0; /* Align to left of its relative parent */
+    width: 100%; /* Make it fill the width of its relative parent */
+    height: 100%; /* Make it fill the height of its relative parent */
+    
+    display: flex; /* Use flexbox for centering content */
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+
+    background-color: rgba(0, 0, 0, 1); /* Fully opaque background now */
+    color: white;
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 15px; /* Match gameContainer radius */
+    text-align: center;
+    z-index: 12; /* Ensure it's clearly above sticks (z-index 0-highest_stick_index) and other elements (z-index 10) */
+    
+    /* Ensure no padding/margin issues that push elements out */
+    box-sizing: border-box;
+}
+
+#gameOver h2 {
+    margin-top: 0;
+    font-size: 2em;
+}
+
+#gameOver p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+#playAgain {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #3498db; /* Blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#playAgain:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+#playAgain:active {
+    transform: translateY(0);
+}
