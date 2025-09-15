@@ -1,24 +1,23 @@
-# 🎮 Tic-Tac-Toe Game
+# 🎯 Pick-Up-Sticks Game
 
-A simple and fun **Tic-Tac-Toe** game built using **HTML, CSS, and JavaScript**.  
-Play against a friend in **Player vs Player** mode or challenge the **Computer AI** in **Player vs Computer** mode.
+A fun browser-based Pick-Up-Sticks game built using HTML, CSS, and JavaScript.
 
-## 🌐 Live Demo
-👉 [Play Here](https://suryanarayannan.github.io/tic-tac-toe-game/)
+## 🌐 Live Demo  
+👉 [Play Here](https://suryanarayannan.github.io/pick-up-sticks-game/)
 
 ## ✨ Features
-- 👫 **Player vs Player (PvP)** mode  
-- 🤖 **Player vs Computer (PvC)** mode with basic AI  
-- 🎵 Sound effects for moves and game results  
-- 📱 Responsive design for different screen sizes  
-- 🏆 Win/Draw detection logic  
+- Two game modes: Player vs Player (PvP) and Player vs Computer (PvC)  
+- Stick removal logic with valid moves  
+- Simple AI for computer opponent  
+- Responsive UI design  
+- Sound & visual feedback for better user experience
 
-## 🛠 Tech Stack
-- **HTML5** – structure  
-- **CSS3** – styling & layout  
-- **JavaScript (ES6)** – game logic & AI  
+## 🛠️ Tech Stack
+- **HTML5** – structure and layout  
+- **CSS3** – styling & animations  
+- **JavaScript (ES6)** – game logic and AI  
 
 ## 🚀 How to Run Locally
 1. Clone the repository  
    ```bash
-   git clone https://github.com/SURYANARAYANNAN/tic-tac-toe-game.git
+   git clone https://github.com/SURYANARAYANNAN/pick-up-sticks-game.git
